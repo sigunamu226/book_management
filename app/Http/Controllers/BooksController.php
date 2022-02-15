@@ -24,7 +24,7 @@ class BooksController extends Controller
 
     //編集画面表示
     public function edit(Book $book_id){
-        $books = Book::where('user_id',Auth::user()->id)->find($book_id);
+        $book = Book::where('user_id',Auth::user()->id)->first();
         return view('bookedit', [
             'book' => $book
         ]);
