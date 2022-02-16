@@ -9,7 +9,7 @@
     <!-- バリデーションエラーの表示に使用 -->
 
     <!-- 本登録フォーム -->
-    <form action="{{ url('books/update') }}" method="POST" class="form-horizontal">
+    <form enctype="multipart/form-data" action="{{ url('books/update') }}" method="POST" class="form-horizontal">
         @csrf
 
             <!-- 本のタイトル -->
@@ -33,7 +33,7 @@
                 <div class="card-title">
                     サムネイル
                 </div>
-                <input type="file" name="book_image" class="form-control" value="{{ $book->book_image }}">
+                <input type="file" name="book_image" class="form-control">
             </div>
 
             <!-- 最新刊発売日 -->

@@ -47,11 +47,19 @@ class BooksController extends Controller
                 ->withErrors($validator);
         }
 
-        //Eroquent モデル（登録処理）
+        $file=$request->file('book_image');
+            if(!empty($file)){
+                $filename = $file->getClientOriginalName();
+                $move = $file->move('./upload/',$filename);
+            }else{
+                $filename = "";
+            }
+
+        //Eroquent モデル（更新処理）
         $books = Book::where('user_id',Auth::user()->id)->find($request->id);
         $books->book_name = $request->book_name;
         $books->book_quantity = $request->book_quantity;
-        $books->book_image = $request->book_image;
+        $books->book_image = $filename;
         $books->book_new = $request->book_new;
         $books->save();
         return redirect('/');
