@@ -51,7 +51,7 @@ class BooksController extends Controller
         $file=$request->file('book_image');
             if(!empty($file)){
                 $filename = $file->getClientOriginalName();
-                $move = $file->move('./upload/',$filename);
+                $file->move('./upload/',$filename);
             }else{
                 $filename = "";
             }
@@ -91,7 +91,7 @@ class BooksController extends Controller
         $file=$request->file('book_image');
             if(!empty($file)){
                 $filename = $file->getClientOriginalName();
-                $move = $file->move('./upload/',$filename);
+                $file->move('./upload/',$filename);
             }else{
                 $filename = "";
             }
