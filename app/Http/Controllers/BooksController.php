@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use Validator;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BooksController extends Controller
 {
@@ -108,6 +109,7 @@ class BooksController extends Controller
 
     //削除
     public function delete(Book $book){
+        Storage::disk('public')->delete($book->book_image);
         $book->delete();
         return redirect('/');
     }
