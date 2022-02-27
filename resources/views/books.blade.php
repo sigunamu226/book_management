@@ -22,7 +22,7 @@
             </div>
 
             <!-- 本の冊数 -->
-            <div class="form-group col-sm-6">
+            <div class="form-group col-sm-6 regist-content">
                 <div class="card-title">
                     冊数
                 </div>
@@ -30,9 +30,9 @@
             </div>
         </div>
 
-        <div class="row mt-4">
+        <div class="row mt-md-4">
             <!-- 本の画像登録 -->
-            <div class="form-group col-sm-6">
+            <div class="form-group col-sm-6 regist-content">
                 <div class="card-title">
                     サムネイル
                 </div>
@@ -40,7 +40,7 @@
             </div>
 
             <!-- 最新刊発売日 -->
-            <div class="form-group col-sm-6">
+            <div class="form-group col-sm-6 regist-content">
                 <div class="card-title">
                     最新刊発売日
                 </div>
@@ -62,7 +62,6 @@
 <!-- Book:すでに登録されている本のリスト -->
 @if(count($books) > 0)
     <div class="card-body">
-        <div class="card-body">
             <table class="table table-striped task-table">
                 <!-- テーブルヘッダ -->
                 <thead>
@@ -73,25 +72,29 @@
                 <tbody>
                 @foreach ($books as $book)
                     <tr>
-                        <!-- 本タイトル -->
-                        <td class="table-text">
-                            <div> {{ $book->book_name }} </div>
+                        <td class="col-2">
                             <div><img src="upload/{{$book->book_image}}" width="100"></div>
                         </td>
 
-                        <!-- 本編集ボタン -->
-                        <td>
-                            <form action="{{ url('bookedit/'.$book->id) }}" method="POST">
+                        <!-- 本タイトル -->
+                        <td class="col-7">
+                            <div> {{ $book->book_name }} </div>
+                            <div> 所持巻数：{{ $book->book_quantity }}冊 </div>
+                            <div> 最新刊発売日：{{ date("Y年m月d日", strtotime($book->book_new)) }} </div>
+                        </td>
+
+                        <!-- ボタン -->
+                        <td class="col-3">
+                            <!-- 本編集ボタン -->
+                            <form action="{{ url('bookedit/'.$book->id) }}" method="POST" class="mb-2">
                                 @csrf
 
                                 <button type="submit" class="btn btn-primary">
                                     編集
                                 </button>
                             </form>
-                        </td>
-                        
-                        <!-- 本削除ボタン -->
-                        <td>
+                            
+                            <!-- 本削除ボタン -->
                             <form action="{{ url('book/'.$book->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -105,7 +108,6 @@
                 @endforeach
                 </tbody>
             </table>
-         </div>
     </div>
     <div class="row">
         <div class="col-md-4 offset-md-4">

@@ -88,6 +88,7 @@ class BooksController extends Controller
                 ->withErrors($validator);
         }
 
+        //画像の保存及びファイル名設定処理
         $file=$request->file('book_image');
             if(!empty($file)){
                 $filename = $file->getClientOriginalName();
