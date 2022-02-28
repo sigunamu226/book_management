@@ -17,7 +17,7 @@ class BooksController extends Controller
 
     //本一覧表示
     public function index(){
-        $books = Book::where('user_id',Auth::user()->id)->orderBy('created_at', 'asc');
+        $books = Book::where('user_id',Auth::user()->id)->orderBy('created_at', 'asc')->get();
         return view('books', [
             'books' => $books
         ]);
