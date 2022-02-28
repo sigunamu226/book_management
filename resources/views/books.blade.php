@@ -85,7 +85,7 @@
                         <!-- ボタン -->
                         <td class="col-3">
                             <!-- 本編集ボタン -->
-                            <form action="{{ url('bookedit/'.$book->id) }}" method="POST" class="mb-2">
+                            <form action="{{ url('/bookedit', $book->id) }}" method="POST" class="mb-2">
                                 @csrf
 
                                 <button type="submit" class="btn btn-primary">

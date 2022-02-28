@@ -20,10 +20,10 @@ use App\Http\Controllers\BooksController;
 Route::get('/',[BooksController::class, 'index']);
 
 //編集画面表示
-Route::post('/bookedit/{book}', [BooksController::class, 'edit']);
+Route::post('/bookedit/{book_id}', [BooksController::class, 'edit']);
 
 //更新処理エラー時表示画面
-Route::get('/bookedit/{book}/validate', [BooksController::class, 'reload'])->name('bookedit');
+Route::get('/bookedit/{book_id}/validate', [BooksController::class, 'reload'])->name('bookedit');
 
 //更新処理
 Route::post('/books/update',[BooksController::class, 'update']);
