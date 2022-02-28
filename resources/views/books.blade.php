@@ -60,7 +60,6 @@
 </div>
 
 <!-- Book:すでに登録されている本のリスト -->
-@if(count($books) > 0)
     <div class="card-body">
             <table class="table table-striped task-table">
                 <!-- テーブルヘッダ -->
@@ -109,11 +108,5 @@
                 </tbody>
             </table>
     </div>
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-            {{ $books->links() }}
-        </div>
-    </div>
-@endif
 
 @endsection
