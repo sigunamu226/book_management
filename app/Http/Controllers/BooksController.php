@@ -48,19 +48,14 @@ class BooksController extends Controller
                 ->withErrors($validator);
         }
 
-        $file=$request->file('book_image');
-            if(!empty($file)){
-                $filename = $file->getClientOriginalName();
-                $file->move('./upload/',$filename);
-            }else{
-                $filename = "";
-            }
+        //画像の保存
+        $file=base64_encode(file_get_contents($request->book_image->getRealPath()));
 
         //Eroquent モデル（更新処理）
         $books = Book::where('user_id',Auth::user()->id)->find($request->id);
         $books->book_name = $request->book_name;
         $books->book_quantity = $request->book_quantity;
-        $books->book_image = $filename;
+        $books->book_image = $file;
         $books->book_new = $request->book_new;
         $books->save();
         return redirect('/');
@@ -88,21 +83,15 @@ class BooksController extends Controller
                 ->withErrors($validator);
         }
 
-        //画像の保存及びファイル名設定処理
-        $file=$request->file('book_image');
-            if(!empty($file)){
-                $filename = $file->getClientOriginalName();
-                $file->move('./upload/',$filename);
-            }else{
-                $filename = "";
-            }
+        //画像の保存
+        $file=base64_encode(file_get_contents($request->book_image->getRealPath()));
 
         //Eroquent モデル（登録処理）
         $books = new Book;
         $books->user_id = Auth::user()->id;
         $books->book_name = $request->book_name;
         $books->book_quantity = $request->book_quantity;
-        $books->book_image = $filename;
+        $books->book_image = $file;
         $books->book_new = $request->book_new;
         $books->save();
         return redirect('/');

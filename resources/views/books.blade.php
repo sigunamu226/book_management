@@ -72,7 +72,7 @@
                 @foreach ($books as $book)
                     <tr>
                         <td class="col-2">
-                            <div><img src="upload/{{$book->book_image}}" width="100"></div>
+                            <div><img src="data:image/jpeg;base64,<?= $book->book_image ?>" width="100"></div>
                         </td>
 
                         <!-- 本タイトル -->
