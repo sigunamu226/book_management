@@ -48,14 +48,15 @@ class BooksController extends Controller
                 ->withErrors($validator);
         }
 
-        //画像の保存
-        $file=base64_encode(file_get_contents($request->book_image->getRealPath()));
-
         //Eroquent モデル（更新処理）
         $books = Book::where('user_id',Auth::user()->id)->find($request->id);
         $books->book_name = $request->book_name;
         $books->book_quantity = $request->book_quantity;
-        $books->book_image = $file;
+         //画像の更新
+         if($request->input("book_image")) {
+            $file=base64_encode(file_get_contents($request->book_image->getRealPath()));
+            $books->book_image = $file;
+        }
         $books->book_new = $request->book_new;
         $books->save();
         return redirect('/');
